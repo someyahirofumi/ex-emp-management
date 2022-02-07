@@ -30,7 +30,11 @@ public class AdministratorService {
 	 */
 	public Administrator login(String mailAddress,String password) {
 		Administrator administrator = repository.findByMailAddressAndPassword(mailAddress, password);
+		if(administrator == null) {
+			return null;
+		}
 		return administrator;
+		
 	}
 	
 	
