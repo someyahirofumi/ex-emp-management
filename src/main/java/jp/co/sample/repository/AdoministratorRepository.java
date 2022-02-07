@@ -34,14 +34,14 @@ public class AdoministratorRepository {
 			String InsertSql ="INSERT INTO administrators(name,mail_address,password) VALUES(:name,:mailAddress,:password);";
 			template.update(InsertSql, param);
 		}else {
-			String UpdateSql="UPDATE administrators set name=:name,mail_address=:mailAddres,password=:password WHERE id=:id;";
+			String UpdateSql="UPDATE administrators set name=:name,mail_address=:mailAddress,password=:password WHERE id=:id;";
 			template.update(UpdateSql, param);		}
 		
 	}
 	
-	public Administrator findByMailAddressAndPassword(String mailAddres,String password) {
-		String sql ="SELECT * FROM adminsitrators WHERE mail_addres=:mailAddres AND password=:password;";
-		SqlParameterSource param =new MapSqlParameterSource().addValue("mailAddres",mailAddres).addValue("password",password);
+	public Administrator findByMailAddressAndPassword(String mailAddress,String password) {
+		String sql ="SELECT * FROM adminsitrators WHERE mail_addres=:mailAddress AND password=:password;";
+		SqlParameterSource param =new MapSqlParameterSource().addValue("mailAddress",mailAddress).addValue("password",password);
 		Administrator administrator =template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
 		try {
 			return administrator;
