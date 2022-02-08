@@ -48,11 +48,11 @@ public class EmployeeRepository {
 	public void update(Employee employee) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 		if (employee.getId() == null) {
-			String insertSql = "INSERT INTO employees VALUES(:id,:name,:image,:gender,:hireDate,:mailAddress,:zipCode,:address,:telephone,:salary,:characteristics,:departmentsCount);";
+			String insertSql = "INSERT INTO employees VALUES(:id,:name,:image,:gender,:hireDate,:mailAddress,:zipCode,:address,:telephone,:salary,:characteristics,:dependentsCount);";
 			template.update(insertSql, param);
 		} else {
-			String updateSql = "UPDATE employees(name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,departments_count) "
-					+ "SET name=:name,image=:image,gender=:gender,hire_date=:hireDate,mail_address=:mailAddress,zip_code=:zipCode,address=:address,telephone=:telephone,salary=:salary,characteristics=:characteristics,departments_count=:departmentsCount "
+			String updateSql = "UPDATE employees "
+					+ "SET name=:name,image=:image,gender=:gender,hire_date=:hireDate,mail_address=:mailAddress,zip_code=:zipCode,address=:address,telephone=:telephone,salary=:salary,characteristics=:characteristics,dependents_count=:dependentsCount "
 					+ "WHERE id=:id;";
 			template.update(updateSql, param);
 		}

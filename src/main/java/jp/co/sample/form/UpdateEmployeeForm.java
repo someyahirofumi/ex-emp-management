@@ -11,7 +11,7 @@ public class UpdateEmployeeForm {
 	public int toIntId() {
 		return Integer.parseInt(id);
 	}
-	public int toIntDepndentsCount() {
+	public int toIntDependentsCount() {
 		return Integer.parseInt(dependentsCount);
 	}
 	public String getId() {
@@ -23,7 +23,7 @@ public class UpdateEmployeeForm {
 	public String getDependentsCount() {
 		return dependentsCount;
 	}
-	public void setDepartmentsCount(String dependentsCount) {
+	public void setDependentsCount(String dependentsCount) {
 		this.dependentsCount = dependentsCount;
 	}
 	@Override

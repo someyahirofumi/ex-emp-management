@@ -16,7 +16,7 @@ import jp.co.sample.service.EmployeeService;
 @RequestMapping("/employee")
 public class EmployeeController {
 	@ModelAttribute
-	public UpdateEmployeeForm setUpUpdateEmoloyeeForm() {
+	public UpdateEmployeeForm setUpUpdateEmployeeForm() {
 		return new UpdateEmployeeForm();
 	}
 
@@ -45,8 +45,10 @@ public class EmployeeController {
 	@RequestMapping("/update")
 
 	public String update(UpdateEmployeeForm form) {
+		System.out.println(form.getDependentsCount());
+		System.out.println(form.getId());
 		Employee employee = service.showDeteil(form.toIntId());
-		employee.setDependentsCount(form.toIntDepndentsCount());
+		employee.setDependentsCount(form.toIntDependentsCount());
 		service.update(employee);
 		return "redirect:/employee/showList";
 		
