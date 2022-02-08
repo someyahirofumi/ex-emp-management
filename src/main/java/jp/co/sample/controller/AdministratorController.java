@@ -83,5 +83,15 @@ public class AdministratorController {
 		}
 	}
 	
+	/**
+	 * @return
+	 * ログアウトメソッド
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return"";
+	}
+	
 
 }
