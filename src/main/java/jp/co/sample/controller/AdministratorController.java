@@ -1,12 +1,16 @@
 package jp.co.sample.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
 @Controller
@@ -18,6 +22,20 @@ public class AdministratorController {
 	@ModelAttribute
 	public InsertAdministratorForm setUpForm() {
 		return new InsertAdministratorForm();
+	}
+	
+	@Autowired
+	private HttpSession session;
+	
+	
+	@ModelAttribute
+	public LoginForm setUpForm2() {
+		return new LoginForm();
+	}
+	
+	@RequestMapping("/")
+	public String toLogin() {
+		return "administrator/login";
 	}
 	
 	/**
@@ -51,6 +69,28 @@ public class AdministratorController {
 		return "redirect:/";
 		
 		
+	}
+	
+	@RequestMapping("/login")
+	public String login(LoginForm form,Model model) {
+		Administrator administrator= service.login(form.getMailAddress(), form.getPassword());
+		if(administrator == null) {
+			model.addAttribute("error","メールアドレスまたはパスワードが不正です");
+			return "administrator/login";
+		}else {
+			session.setAttribute("administratorName", administrator.getName());
+			return "forward:/employee/showList";
+		}
+	}
+	
+	/**
+	 * @return
+	 * ログアウトメソッド
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "/";
 	}
 	
 

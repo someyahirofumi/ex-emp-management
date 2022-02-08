@@ -23,6 +23,20 @@ public class AdministratorService {
 		
 	}
 	
+	/**
+	 * @param mailAddress
+	 * @param password
+	 * @return mailAddressとpasswordをrepositoryクラスのfindByMailAddressAndPasswordメソッドに渡す。帰ってきた情報をそのままリターン（ヒット0の場合はNull
+	 */
+	public Administrator login(String mailAddress,String password) {
+		Administrator administrator = repository.findByMailAddressAndPassword(mailAddress, password);
+		if(administrator == null) {
+			return null;
+		}
+		return administrator;
+		
+	}
+	
 	
 
 }
