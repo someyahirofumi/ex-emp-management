@@ -1,5 +1,7 @@
 package jp.co.sample.form;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author someyahirofumi
  *
@@ -7,6 +9,7 @@ package jp.co.sample.form;
 public class UpdateEmployeeForm {
 	
 	private String id;
+	@NotBlank(message ="扶養人数を入力してください。")
 	private String dependentsCount;
 	public int toIntId() {
 		return Integer.parseInt(id);
