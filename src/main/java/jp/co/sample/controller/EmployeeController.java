@@ -2,6 +2,7 @@ package jp.co.sample.controller;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,12 +51,11 @@ public class EmployeeController {
 		if(result.hasErrors()) {
 			return showDetail(form.toIntId(),model);
 		}
-		System.out.println(form.getDependentsCount());
-		System.out.println(form.getId());
+	
 		Employee employee = service.showDeteil(form.toIntId());
-		employee.setDependentsCount(form.toIntDependentsCount());
+		BeanUtils.copyProperties(form, employee);
 		service.update(employee);
-		return "redirect:/employee/showList";
+		return "redirect:/employee/showList";	
 		
 
 	}
